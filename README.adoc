@@ -1,0 +1,72 @@
+= docker-nodejs-unresponsive-app
+
+Simple node,js app NOT responding to any request except /manage/health or /api/health.
+
+This application is used as a system test helper for circuit breaker scenarios in real environments.
+
+
+The structure of this projects matchs the requirements for a Docker Hub Automated Build.
+
+A corresponding Docker image can be used e.g. for a AWS EC2 Container deployment to get
+a public available "unresponsive" application very quickly.
+
+
+== API
+
+Default behaviour is "unresponsive". The server then never
+responds except for the health checks and responsive switch.
+
+HTTP-GET for the switch is just used for fast testing convenience
+and does not follow any RESTful approach.
+
+
+.Available Methods
+|===
+|HTTP-Method |Uri |Description
+
+|GET
+|/manage/health
+|Returns health and responsivity status
+
+|GET
+|/api/health
+|Returns health and responsivity status
+
+|GET
+|/manage/set_responsive
+|Sets the behaviour to "repsonsive", server response always 200-OK
+
+|GET
+|/manage/set_unresponsive
+|Sets the behaviour to "unresponsive", server does not answer for arbitrary uris except these /manage methods.
+|===
+
+
+==== Manage Responses
+
+The above mentioned /manage methods answer with OK-health
+and the current (global) responsivity setting.
+
+[[json-health]]
+[source,json]
+----
+{
+  "status": "OK",
+  "responsivity": "unresponsive"
+}
+----
+
+
+==== Response in "responsive" mode
+
+If the server is set to "responsive", any Uri request
+but the above mentioned /manage methods is answered with HTTP-200
+and a reflection of the request uri.
+
+[[json-health]]
+[source,json]
+{
+  "status": "OK",
+  "requestUri": "/any/other/uri"
+}
+
