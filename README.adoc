@@ -20,32 +20,49 @@ Default behaviour is "unresponsive". The server then never
 responds except for the health checks and responsive switch.
 
 HTTP-GET for the switch is just used for fast testing convenience
-and does not follow any RESTful approach.
+and does not follow any REST-oriented approach (sorry).
 
 
 .Available Methods
 |===
-|HTTP-Method |Uri |Description
+|HTTP-Method |Uri |Response| Description
 
 |GET
 |/manage/health
+|200
 |Returns health and responsivity status
 
 |GET
 |/api/health
+|200
 |Returns health and responsivity status
 
 |GET
 |/manage/set_responsive
-|Sets the behaviour to "repsonsive", server response always 200-OK
+|200
+|Sets the behaviour to "responsive"
 
 |GET
 |/manage/set_unresponsive
-|Sets the behaviour to "unresponsive", server does not answer for arbitrary uris except these /manage methods.
+|200
+|Sets the behaviour to "unresponsive"
+
+|GET, POST
+|/any/other/uri
+|none (timeout)
+|Server does not answer with (default) mode "unresponsive"
+
+|GET, POST
+|/any/other/uri
+|200
+|Server returns always with 200 with mode "responsive"
 |===
 
+"Unresponsive" := the server doesn't answer at all, if using
+arbitrary uris except these /api/health and the /manage methods.
 
-==== Manage Responses
+
+==== Manage Response Payload
 
 The above mentioned /manage methods answer with OK-health
 and the current (global) responsivity setting.
@@ -63,10 +80,11 @@ and the current (global) responsivity setting.
 ==== Response in "responsive" mode
 
 If the server is set to "responsive", any Uri request
-but the above mentioned /manage methods is answered with HTTP-200
-and a reflection of the request uri.
+but the above mentioned /api/health and /manage methods
+causes a HTTP 200-OK response together with a payload
+containing the requested resource.
 
-[[json-health]]
+[[json-responsive]]
 [source,json]
 {
   "status": "OK",
