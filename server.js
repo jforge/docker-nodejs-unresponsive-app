@@ -1,37 +1,13 @@
 'use strict';
-const http = require('http');
-var isResponsive = false;
 
-function respond200Json(res, info) {
-    res.writeHead(200, {'Content-Type': 'application/json'});
-    var responsivity = isResponsive ? "responsive" : "unresponsive";
+// create a http server listening to any port
 
-    if (info) {
-        res.end('{ "status" : "OK", ' + info + ' }');
-    } else {
-        res.end('{ "status" : "OK", "responsivity" : "' + responsivity + '" }');
-    }
+// do not respond to any request
 
-}
+// respond to uris described in the docs
 
-const server = http.createServer((req, res) => {
-    if (req.url === '/manage/health' || req.url === '/api/health') {
-        respond200Json(res);
-    }
+// support the /manage/ uris describes in the docs to switch between responsive and unresponsive behaviour
 
-    if (req.method === 'GET') {
-        if (req.url === '/manage/set_responsive') {
-            isResponsive = true;
-            respond200Json(res);
-        } else if (req.url === '/manage/set_unresponsive') {
-            isResponsive = false;
-            respond200Json(res);
-        }
-    }
+// reflect the request uri in responsive mode on any other uri but the functional ones.
 
-    if (isResponsive) {
-        respond200Json(res, '"requestUri" : "' + req.url + '"');
-    }
-
-});
-server.listen(8095);
+// create a common function for the HTTP-200 response containing the status of the app.
