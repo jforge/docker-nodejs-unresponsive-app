@@ -1,9 +1,9 @@
 = docker-nodejs-unresponsive-app
 
-Simple node,js app NOT responding to any request except /manage/health or /api/health.
+Simple Node.js app NOT responding to any TCP request (except for the HTTP maintenance endpoints).
 
 This application is used as a system test helper for circuit breaker scenarios in real environments.
-
+Although it is meant as an HTTP application, unresponsitivity can as well be tested with any TCP-based protocol.
 
 The structure of this projects matches requirements for a Docker Hub Automated Build, e.g. https://hub.docker.com/r/eolio/docker-nodejs-unresponsive-app/
 
@@ -23,7 +23,7 @@ HTTP-GET for the switch is just used for fast testing convenience
 and does not follow any REST-oriented approach (sorry).
 
 
-.Available Methods
+.Available HTTP Methods
 |===
 |HTTP-Method |Uri |Response| Description
 

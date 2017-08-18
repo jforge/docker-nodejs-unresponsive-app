@@ -34,4 +34,13 @@ const server = http.createServer((req, res) => {
     }
 
 });
-server.listen(8095);
+
+// Handle clientError to prevent Node from closing sockets on non-HTTP requests
+server.on('clientError', function (err, socket) {
+    // Only if App is set to responsive, kill the socket.
+    if (isResponsive) socket.destroy('Invalid request!');
+});
+
+server.listen(5672, function () {
+    console.log('Server listening on Port ' + this.address().port + '...')
+});
