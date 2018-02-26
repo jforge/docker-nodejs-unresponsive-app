@@ -1,5 +1,4 @@
-[caption="Donate with Open Source Citizen",link=http://www.opensourcecitizen.org/project?url=github.com/jforge/docker-nodejs-unresponsive-app]
-image::http://www.opensourcecitizen.org/badge?url=github.com/jforge/docker-nodejs-unresponsive-app
+[caption="Donate with Open Source Citizen",link=http://www.opensourcecitizen.org/project?url=github.com/jforge/docker-nodejs-unresponsive-app]image::http://www.opensourcecitizen.org/badge?url=github.com/jforge/docker-nodejs-unresponsive-app
 [Donate with Open Source Citizen]
 
 
