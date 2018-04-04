@@ -1,4 +1,4 @@
-FROM node:argon@sha256:e8b42f95aee37523cbc584d4d33f481132de11c3eed7b341c0cff3b0b234d93f
+FROM node:argon@sha256:36adaf7ae6d88589009b54b1fef7a660768db5ec8248e82944604c07455d46ba
 
 # create app directory
 RUN mkdir -p /usr/src/app
