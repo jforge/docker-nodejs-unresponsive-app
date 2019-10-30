@@ -41,6 +41,6 @@ server.on('clientError', function (err, socket) {
     if (isResponsive) socket.destroy('Invalid request!');
 });
 
-server.listen(5672, function () {
+server.listen(8095, function () {
     console.log('Server listening on Port ' + this.address().port + '...')
 });
