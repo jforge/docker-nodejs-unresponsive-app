@@ -1,3 +1,4 @@
+![Actions Status](https://github.com/jforge/docker-nodejs-unresponsive-app/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/jforge/docker-nodejs-unresponsive-app/actions?query=workflow%3A"Docker+Image+CI")
 
 = docker-nodejs-unresponsive-app
 
@@ -10,7 +11,7 @@ Although it is meant as an HTTP application, unresponsitivity can as well be tes
 
 Run docker with
 ```
-docker run -p 8080:8095 eolio/docker-nodejs-unresponsive-app
+docker run -p 8080:8095 docker.pkg.github.com/jforge/docker-nodejs-unresponsive-app/unresponsive-webapp:v-1572443441
 ```
 
 The projects matches requirements for a Docker Hub Automated Build, e.g. https://hub.docker.com/r/eolio/docker-nodejs-unresponsive-app/
