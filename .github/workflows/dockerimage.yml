@@ -1,0 +1,20 @@
+name: Docker Image CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: define version
+      id: vars
+      run: echo ::set-output name=image_version::v-$(date +%s)
+    - name: docker login && docker build && docker push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GPR_PAT: ${{ secrets.GPR_PAT }}
+        IMAGE_NAME: 'unresponsive-webapp'
+      run: |
+        docker login -u ${GITHUB_ACTOR} -p ${GPR_PAT} docker.pkg.github.com
+        docker build -f Dockerfile -t docker.pkg.github.com/${GITHUB_REPOSITORY}/${IMAGE_NAME}:${{ steps.vars.outputs.image_version }} .
+        docker push docker.pkg.github.com/${GITHUB_REPOSITORY}/${IMAGE_NAME}:${{ steps.vars.outputs.image_version }}
+        curl -s -H "Authorization: Token ${GITHUB_TOKEN}" -H "Accept: application/json" -H "Content-type: application/json" -X POST -d "{ \"ref\": \"refs/tags/${{ steps.vars.outputs.image_version }}\", \"sha\": \"${GITHUB_SHA}\"}" https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs
