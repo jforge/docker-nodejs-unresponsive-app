@@ -1,13 +1,13 @@
-![Actions Status](https://github.com/jforge/docker-nodejs-unresponsive-app/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/jforge/docker-nodejs-unresponsive-app/actions?query=workflow%3A"Docker+Image+CI")
+[![Actions Status](https://github.com/jforge/docker-nodejs-unresponsive-app/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/jforge/docker-nodejs-unresponsive-app/actions?query=workflow%3A"Docker+Image+CI")
 
-= docker-nodejs-unresponsive-app
+# docker-nodejs-unresponsive-app
 
 Simple Node.js app NOT responding to any TCP request (except for the HTTP maintenance endpoints).
 
 This application is used as a system test helper for circuit breaker scenarios in real environments.
 Although it is meant as an HTTP application, unresponsitivity can as well be tested with any TCP-based protocol (requires Node v6 or higher).
 
-== Startup
+## Startup
 
 Run docker with
 ```
@@ -19,7 +19,7 @@ The projects matches requirements for a Docker Hub Automated Build, e.g. https:/
 A corresponding Docker image can be used e.g. for a AWS EC2 Container deployment to get a public available "unresponsive" application very quickly, e.g. http://ec2-35-156-94-40.eu-central-1.compute.amazonaws.com/manage/health
 
 
-== API
+## API
 
 Default behaviour is "unresponsive". The server then never
 responds except for the health checks and responsive switch.
@@ -27,72 +27,44 @@ responds except for the health checks and responsive switch.
 HTTP-GET for the switch is just used for fast testing convenience
 and does not follow any REST-oriented approach (sorry).
 
+Available HTTP Methods:
 
-.Available HTTP Methods
-|===
 |HTTP-Method |Uri |Response| Description
-
-|GET
-|/manage/health
-|200
-|Returns health and responsivity status
-
-|GET
-|/api/health
-|200
-|Returns health and responsivity status
-
-|GET
-|/manage/set_responsive
-|200
-|Sets the behaviour to "responsive"
-
-|GET
-|/manage/set_unresponsive
-|200
-|Sets the behaviour to "unresponsive"
-
-|GET, POST
-|/any/other/uri
-|none (timeout)
-|Server does not answer with (default) mode "unresponsive"
-
-|GET, POST
-|/any/other/uri
-|200
-|Server returns always with 200 with mode "responsive"
-|===
+|---|---|---:|---|
+|GET|/manage/health|200|Returns health and responsivity status
+|GET|/api/health|200|Returns health and responsivity status
+|GET|/manage/set_responsive|200|Sets the behaviour to "responsive"
+|GET|/manage/set_unresponsive|200|Sets the behaviour to "unresponsive"
+|GET, POST|/any/other/uri|none (timeout)|Server does not answer with (default) mode "unresponsive"
+|GET, POST|/any/other/uri|200|Server returns always with 200 with mode "responsive"
 
 "Unresponsive" := the server doesn't answer at all, if using
 arbitrary uris except these /api/health and the /manage methods.
 
 
-==== Manage Response Payload
+#### Manage Response Payload
 
 The above mentioned /manage methods answer with OK-health
 and the current (global) responsivity setting.
 
-[[json-health]]
-[source,json]
-----
-{
+```json
+{ 
   "status": "OK",
   "responsivity": "unresponsive"
 }
-----
+```
 
 
-==== Response in "responsive" mode
+#### Response in "responsive" mode
 
 If the server is set to "responsive", any Uri request
 but the above mentioned /api/health and /manage methods
 causes a HTTP 200-OK response together with a payload
 containing the requested resource.
 
-[[json-responsive]]
-[source,json]
+```json
 {
   "status": "OK",
   "requestUri": "/any/other/uri"
 }
-
+```
