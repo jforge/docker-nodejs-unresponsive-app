@@ -16,21 +16,19 @@ docker run -p 8080:8095 docker.pkg.github.com/jforge/docker-nodejs-unresponsive-
 
 The projects matches requirements for a Docker Hub Automated Build, e.g. https://hub.docker.com/r/eolio/docker-nodejs-unresponsive-app/
 
-A corresponding Docker image can be used e.g. for a AWS EC2 Container deployment to get a public available "unresponsive" application very quickly, e.g. http://ec2-35-156-94-40.eu-central-1.compute.amazonaws.com/manage/health
+A corresponding Docker image can be used e.g. for a AWS EC2 Container deployment to get a public available "unresponsive" application very quickly, e.g. http://<your-ec2-instance-id>.<aws-region>.compute.amazonaws.com/manage/health
 
 
 ## API
 
-Default behaviour is "unresponsive". The server then never
-responds except for the health checks and responsive switch.
+Default behaviour is "unresponsive". The server then never responds except for the health checks and responsive switch.
 
-HTTP-GET for the switch is just used for fast testing convenience
-and does not follow any REST-oriented approach (sorry).
+HTTP-GET for the switch is just used for fast testing convenience and does not follow any REST-oriented approach (sorry).
 
 Available HTTP Methods:
 
 |HTTP-Method |Uri |Response| Description
-|---|---|---:|---|
+|:---|:---|---:|:---|
 |GET|/manage/health|200|Returns health and responsivity status
 |GET|/api/health|200|Returns health and responsivity status
 |GET|/manage/set_responsive|200|Sets the behaviour to "responsive"
@@ -44,8 +42,7 @@ arbitrary uris except these /api/health and the /manage methods.
 
 #### Manage Response Payload
 
-The above mentioned /manage methods answer with OK-health
-and the current (global) responsivity setting.
+The above mentioned /manage methods answer with OK-health and the current (global) responsivity setting.
 
 ```json
 { 
@@ -57,10 +54,7 @@ and the current (global) responsivity setting.
 
 #### Response in "responsive" mode
 
-If the server is set to "responsive", any Uri request
-but the above mentioned /api/health and /manage methods
-causes a HTTP 200-OK response together with a payload
-containing the requested resource.
+If the server is set to "responsive", any Uri request but the above mentioned /api/health and /manage methods causes a HTTP 200-OK response together with a payload containing the requested resource.
 
 ```json
 {
