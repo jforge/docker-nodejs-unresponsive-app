@@ -1,3 +1,4 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jforge_docker-nodejs-unresponsive-app&metric=alert_status)](https://sonarcloud.io/dashboard?id=jforge_docker-nodejs-unresponsive-app)
 [![Actions Status](https://github.com/jforge/docker-nodejs-unresponsive-app/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/jforge/docker-nodejs-unresponsive-app/actions?query=workflow%3A"Docker+Image+CI")
 
 # docker-nodejs-unresponsive-app
