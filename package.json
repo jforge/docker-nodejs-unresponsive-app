@@ -1,8 +1,8 @@
 {
   "name": "unresponsive_app",
-  "version": "1.0.0",
-  "description": "Node.js on Docker",
-  "author": "Void <void@eol.io",
+  "version": "1.1.0",
+  "description": "simple server with switches for connectivity tests",
+  "author": "Void <info@eol.io",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
