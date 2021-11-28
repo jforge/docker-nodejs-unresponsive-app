@@ -36,17 +36,16 @@ Available HTTP request:
 |GET|/api/health|200|Returns health and responsivity status
 |GET|/manage/set_responsive|200|Sets the behaviour to "responsive"
 |GET|/manage/set_unresponsive|200|Sets the behaviour to "unresponsive"
-|GET|/manage/set_responsive|200|Sets the behaviour to "responsive"
+|GET|/manage/allow_head_requests|200|Allows HEAD requests"
+|GET|/manage/block_head_requests|200|Blocks HEAD requests"
 |GET, POST|/any/other/uri|none (timeout)|Server does not answer with (default) mode "unresponsive"
 |GET, POST|/any/other/uri|200|Server returns always with 200 with mode "responsive"
 
 "Unresponsive" := the server doesn't answer at all, if using
-arbitrary uris except these /api/health and the /manage methods.
-
 
 #### Manage Response Payload
 
-The above mentioned /manage methods answer with OK-health and the current (global) responsivity setting.
+The above-mentioned /manage methods answer with OK-health and the current (global) responsivity setting.
 
 ```json
 { 
