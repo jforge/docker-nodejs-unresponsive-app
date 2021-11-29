@@ -27,37 +27,48 @@ The server then never responds except for the health checks and responsive switc
 
 HTTP-GET for the switches is just used for convenience and does not follow any REST-oriented approach (sorry).
 
-Available HTTP request:
+Available HTTP requests:
 
 |HTTP method |Uri |Response |Description
 |:---|:---|---:|:---|
 |HEAD|*|200|Returns empty, if head request is not blocked
+|OPTIONS|*|200|Returns with options response headers, if not blocked
 |GET|/manage/health|200|Returns health and responsivity status
 |GET|/api/health|200|Returns health and responsivity status
 |GET|/manage/set_responsive|200|Sets the behaviour to "responsive"
 |GET|/manage/set_unresponsive|200|Sets the behaviour to "unresponsive"
-|GET|/manage/allow_head_requests|200|Allows HEAD requests
-|GET|/manage/block_head_requests|200|Blocks HEAD requests
+|GET|/manage/method/head/allow|200|Allows HEAD requests (default)
+|GET|/manage/method/head/block|200|Blocks HEAD requests
+|GET|/manage/method/options/allow|200|Allows OPTIONS requests (default)
+|GET|/manage/method/options/block|200|Blocks OPTIONS requests
 |GET, POST|/any/other/uri|none (timeout)|Server does not answer with (default) mode "unresponsive"
 |GET, POST|/any/other/uri|200|Server returns always with 200 with mode "responsive"
 
 "Unresponsive" := the server doesn't answer at all, if using
 
+"Allows/Blocks" : = the server allows or blocks requests with the particular http method.
+
+
 #### Manage Response Payload
 
 The above-mentioned /manage methods answer with OK-health and the current (global) responsivity setting.
 
+The values for the http method HEAD and OPTIONS are displayed accordingly.
+
 ```json
 { 
   "status": "OK",
-  "responsivity": "unresponsive"
+  "responsivity": "unresponsive",
+  "HEAD" : "allowed",
+  "OPTIONS": "allowed"
 }
 ```
 
 
 #### Response in "responsive" mode
 
-If the server is set to "responsive", any Uri request but the above mentioned /api/health and /manage methods causes a HTTP 200-OK response together with a payload containing the requested resource.
+If the server is set to "responsive", any Uri request but the above-mentioned /api/health and /manage methods 
+causes an HTTP 200-OK response together with a payload containing the requested resource.
 
 ```json
 {

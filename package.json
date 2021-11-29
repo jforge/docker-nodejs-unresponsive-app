@@ -1,6 +1,6 @@
 {
   "name": "unresponsive_app",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "simple server with switches for connectivity tests",
   "author": "Void <info@eol.io",
   "main": "server.js",

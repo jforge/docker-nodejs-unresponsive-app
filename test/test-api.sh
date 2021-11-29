@@ -44,16 +44,28 @@ echo $?
 ${HTTP_CLIENT_CALL_PREFIX} --method=POST ${BASE_URI}/any/other/uri/with/post
 echo $?
 
-${HTTP_CLIENT_CALL_PREFIX} ${BASE_URI}/manage/block_head_requests
+${HTTP_CLIENT_CALL_PREFIX} ${BASE_URI}/manage/method/head/block
 echo $?
 
 ${HTTP_CLIENT_CALL_PREFIX} --tries=1 --timeout=3 --method=HEAD ${BASE_URI}/manage/health
 echo $?
 
-${HTTP_CLIENT_CALL_PREFIX} ${BASE_URI}/manage/allow_head_requests
+${HTTP_CLIENT_CALL_PREFIX} ${BASE_URI}/manage/method/head/allow
 echo $?
 
 ${HTTP_CLIENT_CALL_PREFIX} --method=HEAD ${BASE_URI}/manage/health
+echo $?
+
+${HTTP_CLIENT_CALL_PREFIX} ${BASE_URI}/manage/method/options/block
+echo $?
+
+${HTTP_CLIENT_CALL_PREFIX} --tries=1 --timeout=3 --method=OPTIONS ${BASE_URI}/manage/health
+echo $?
+
+${HTTP_CLIENT_CALL_PREFIX} ${BASE_URI}/manage/method/options/allow
+echo $?
+
+${HTTP_CLIENT_CALL_PREFIX} --method=OPTIONS ${BASE_URI}/manage/health
 echo $?
 
 ${HTTP_CLIENT_CALL_PREFIX} ${BASE_URI}/manage/set_unresponsive
